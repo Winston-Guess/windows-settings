@@ -48,6 +48,7 @@ DOSKEY vi=vim
 DOSKEY ls=dir
 DOSKEY c.=cd..
 DOSKEY clear=cls
+DOSKEY netreset=netsh winsock reset ^& echo Now you have to restart
 
 DOSKEY cwg=cd ^C:\Users\WinstonG
 DOSKEY cww=cd ^C:\dev\InfrastructureBuild\www
@@ -61,17 +62,25 @@ DOSKEY cot=cd ^C:\dev\InfrastructureBuild\energy-odyssey
 
 DOSKEY gs=git status
 DOSKEY gb=git branch
-DOSKEY gp=git pull
+DOSKEY gcco=git checkout -b $* ^& echo. ^& echo Branch created ^& echo. ^& git status
+DOSKEY gccof=git checkout -b feature ^& echo. ^& echo Branch created ^& echo. ^& git status
+DOSKEY gbr=git branch -m $* ^& echo. ^& echo Branch renamed ^& echo. ^& git status
+DOSKEY gbd=git branch -d $*
+DOSKEY gbm=git branch -d feature
+DOSKEY gp=git pull ^& timeout 1 ^>nul ^& echo. ^& git status
+DOSKEY gsus=git submodule update ^--init ^--recursive ^& timeout 1 ^>nul ^& echo. ^& git status
 DOSKEY ga=git add $*
 DOSKEY gc=git commit
 DOSKEY gcm=git commit -m $*
 DOSKEY gca=git commit --amend
 DOSKEY gd=git diff
-DOSKEY go=git checkout
-DOSKEY gotp=go team-phoenix
-DOSKEY gom=go master
-DOSKEY gof=go feature
-DOSKEY gbm=git branch -m $*
+DOSKEY gco=git checkout
+DOSKEY gcotp=git checkout team-phoenix
+DOSKEY gscotp=git stash ^& git checkout team-phoenix ^& git stash pop
+DOSKEY gcom=git checkout master
+DOSKEY gscom=git stash ^& git checkout master ^& git stash pop
+DOSKEY gcof=git checkout feature
+DOSKEY gscof=git stash ^& git checkout feature ^& git stash pop
 DOSKEY gmb=git merge-base
 DOSKEY gmbt=git merge-base team-phoenix feature
 DOSKEY gmbm=git merge-base team-phoenix feature
@@ -112,3 +121,5 @@ DOSKEY macros=doskey /macros
 DOSKEY ip=powershell -noni -nop -ep bypass -c "$c=new-object System.Net.WebClient;$e=$c.DownloadString('http://icanhazip.com');write-host $e"
 DOSKEY ..=cd ..
 DOSKEY home=cd %USERPROFILE%
+
+DOSKEY gpem=SETX PATH "%GOPATH%;C:\dev\InfrastructureBuild\energy-mercury" /M
